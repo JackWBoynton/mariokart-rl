@@ -19,3 +19,5 @@ gen_expert_data.py
 main.py
 ray_train.py
 models.py
+
+**/.DS_Store
