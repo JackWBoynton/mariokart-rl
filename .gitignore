@@ -1,0 +1,10 @@
+*.pkl
+*.npy
+__pycache__
+.git
+.DS_Store
+.ipynb_checkpoints
+.vscode
+*.ipynb
+data/*
+
