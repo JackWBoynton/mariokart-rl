@@ -8,3 +8,14 @@ __pycache__
 *.ipynb
 data/*
 
+**/__pycache__
+**/dist
+**/mario_env.egg-info
+
+test.py
+buffers.py
+data_structures.py
+gen_expert_data.py
+main.py
+ray_train.py
+models.py
