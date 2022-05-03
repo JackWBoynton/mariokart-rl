@@ -6,6 +6,7 @@
 * `numpy`
 * `OpenGL` for vis
 * `Pangolin` for vis: [Pangolin](https://github.com/JackWBoynton/pangolin)
+* `Dolphin >=5.0` [Dolphin Emulator](https://github.com/JackWBoynton/dolphin) (my fork for hotkey automation)
 
 ## OpenAI Gym Environment
 
@@ -33,6 +34,25 @@
       * `constants.py`
         * Configuration options
 
-## TODO:
+### Usage
 
-* 
+```bash
+python3 -m pip install -e mario-env
+```
+
+```python3
+import gym
+import mario_env
+
+env_id = "MarioEnv-v0"
+
+env = gym.make(env_id)
+env.reset()
+```
+
+## TODO
+
+* Use trajectories of edges of the road to determine if kart is on the track or not
+* Save trajectories for offline visualization
+* Update Dolphin Emulator to allow for unix fifo pipe frame dumps
+  * Train object detection model to detect obstacles in the road for grand prix races
