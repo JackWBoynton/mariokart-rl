@@ -3,12 +3,14 @@ import os
 import socket
 import struct
 
+
 class MemoryWatcher:
     """Reads and parses game memory changes.
     Pass the location of the socket to the constructor, then either manually
     call next() on this class to get a single change, or else use it like a
     normal iterator.
     """
+
     def __init__(self, path):
         """Deletes the old socket."""
         self.path = path
@@ -39,9 +41,9 @@ class MemoryWatcher:
         try:
             data = self.sock.recvfrom(1024)
             self.data = data
-            data = data[0].decode('utf-8').splitlines()
-            if '\x00' in data:
-                data.remove('\x00')
+            data = data[0].decode("utf-8").splitlines()
+            if "\x00" in data:
+                data.remove("\x00")
             addrs = data[::2]
             values = data[1::2]
             out = []
