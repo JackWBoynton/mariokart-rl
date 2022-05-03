@@ -1,4 +1,4 @@
-from cgitb import handler
+
 import struct
 import time
 import pickle
@@ -14,7 +14,6 @@ from .state import Menu, ScreenID
 from .constants import *
 
 POSMAP = {"xpos": (XMIN, XMAX), "ypos": (YMIN, YMAX), "zpos": (ZMIN, ZMAX)}
-
 
 def norm(val, name):
     if "_" in name:
@@ -42,10 +41,6 @@ def int_handler(obj, name, shift=0, mask=0xFF, wrapper=None, default=None, que=N
         else:
             transformed = (struct.unpack(">i", value)[0] >> shift) & mask
 
-        if name in ["xpos", "ypos", "zpos"] or (
-            "_" in name and name.split("_")[-1] in ["xpos", "ypos", "zpos"]
-        ):
-            transformed = norm(transformed, name)
 
         if isinstance(que, list):
             que.append((time.time_ns(), name, transformed))
@@ -218,7 +213,7 @@ class StateManager:
         # self.addresses[raceData2 + " C"] = float_handler(player, "race_completion", que=self.player_data)
         # self.addresses[raceData2 + " 1C"] = float_handler(player, "lap_completion", que=self.player_data)
 
-        # INC HERE
+        # resume HERE
 
         self.addresses[RaceInfo + " 1B9"] = int_handler(
             self.state, "minutes", mask=0xFF, que=self.player_data

@@ -45,7 +45,7 @@ MIN_VELOCITY = 0.5
 LAP_REWARD_SCALE = 100
 STATE_LOOKBACK = 10  # look at 10 previous states per step
 try:
-    print("loading trajectories...")
+    print("loading track trajectories...")
     CENTER_TRAJ = np.load(
         "/Users/jackboynton/mariokart-rl/mario-env/mario_env/envs/centerline_traj.npy"
     )
@@ -55,7 +55,7 @@ try:
     LEFT_TRAJ = np.load(
         "/Users/jackboynton/mariokart-rl/mario-env/mario_env/envs/lefttraj.npy"
     )
-    print("loaded trajectories")
+    print("loaded track trajectories")
 except Exception as e:
     print(e)
     CENTER_TRAJ = None

@@ -5,7 +5,6 @@ import subprocess
 import time
 import queue
 import math
-from sklearn.preprocessing import StandardScaler
 import joblib
 import threading
 

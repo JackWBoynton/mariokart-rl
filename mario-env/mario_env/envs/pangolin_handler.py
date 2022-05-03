@@ -49,15 +49,17 @@ class Visualizer(object):
             self.dcam.Activate(self.scam)
 
             if self.state is not None:
-                for traj in self.state:
-                    xs, ys, zs = traj.pangolin_pts()
-                    if len(xs) > 0:
-                        gl.glPointSize(3) if traj.name == "pos" else gl.glPointSize(1)
-                        gl.glColor3f(*TRAJ_CMAP[traj.name])
-                        pts = np.asarray(list(zip(xs, ys, zs)))
-                        pangolin.DrawPoints(pts)
+                if isinstance(self.state, list):
+                    for traj in self.state:
+                        xs, ys, zs = traj.pangolin_pts()
+                        if len(xs) > 0:
+                            gl.glPointSize(3) if traj.name == "pos" else gl.glPointSize(1)
+                            gl.glColor3f(*TRAJ_CMAP[traj.name])
+                            pts = np.asarray(list(zip(xs, ys, zs)))
+                            pangolin.DrawPoints(pts)
 
-                pangolin.FinishFrame()
+                    pangolin.FinishFrame()
+                # might add other stuff here i guess...
 
     def paint(self, trajs):
         self.q.put(trajs)
