@@ -1,4 +1,4 @@
-# Reinforcement Learning in Mario Kart Wii
+# Reinforcement Learning v. Mario Kart Wii
 
 ## Requirements
 
