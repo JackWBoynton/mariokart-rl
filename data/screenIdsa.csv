@@ -1,0 +1,190 @@
+﻿"Empty, it seems",0x00
+ESRB notice,0x01
+60Hz suggestion,0x02
+Data corrupt,0x03
+Can't save,0x04
+System memory corrupt,0x05
+Mii Data corrupt,0x06
+Grand Prix Pan Overlay,0x07
+VS Pan Overlay,0x08
+Battle Pan Overlay,0x09
+Mission Pan Overlay,0x0A
+Tournament Pan Overlay,0x0B
+Grand Prix Interface,0x0C
+Time Trial Interface,0x0D
+1P VS Race Interface,0x0E
+2P VS Race Interface,0x0F
+3P VS Race Interface,0x10
+4P VS Race Interface,0x11
+1P Battle Interface,0x12
+2P Battle Interface,0x13
+3P Battle Interface,0x14
+4P Battle Interface,0x15
+Mission and Tournament Interface,0x16
+Grand Prix Pause Menu,0x17
+VS Race Pause Menu,0x18
+Time Trial Pause Menu,0x19
+Battle Pause Menu,0x1A
+Tournament Pause Menu,0x1B
+Ghost Race Pause Menu,0x1C
+Abandon Ghost Race?,0x1D
+Quit Ghost Race?,0x1E
+Ghost Replay Pause Menu,0x1F
+"Grand Prix End Screen (Next Race, Watch Replay, Quit)",0x20
+"Time Trial End Screen (Retry, Change Course, etc.)",0x21
+"VS Race End Screen (Next Race, Quit)",0x22
+"Battle End Screen (Next Battle, Quit)",0x23
+"Battle End Screen (Next only, to final results)",0x24
+"Mission End Screen (Retry, Choose Mission, Quit. Unused)",0x25
+Tournament End Screen,0x26
+Ghost Race End Screen (Next/Quit),0x27
+Go to Friend Roster?,0x28
+You beat your friend's record! Send your ghost?,0x29
+Send tourney record,0x2A
+Check rankings?,0x2B
+Are you sure you want to quit?,0x2C
+Splits after TT,0x2D
+Leaderboard after TT,0x2E
+GP/VS score update screen,0x2F
+GP/VS score overall screen,0x30
+Online race point update screen,0x31
+Team VS point overall screen,0x32
+Battle point update screen,0x33
+Battle point overall screen,0x34
+Competition personal leaderboard,0x35
+Grand Prix replay interface,0x36
+Ghost Race interface,0x37
+Grand Prix replay pause,0x38
+TT Immediate Replay pause,0x39
+"Supporting panel (Present in many modes in-race, 2nd element)",0x3A
+Probably award interface (untested),0x3B
+Probably congrats screen (untested),0x3C
+Credits VS interface (untested),0x3D
+Credits latter interface (untested),0x3E
+Congrats after credits,0x3F
+Wi-Fi Race Interface,0x40
+2P Wi-Fi Race Interface,0x41
+Wi-Fi Friend Room Race Interface,0x42
+Wi-Fi Friend Room Team Race Interface,0x43
+Congratuations! at end of friend room (untested),0x44
+Dummy? Seems to immediately load 0x46,0x45
+"Online Race End (Next Race, Quit, Friend Roster)",0x46
+Quit online race?,0x47
+"End of online race ""Please wait"" text",0x48
+Live VS view interface,0x49
+Live Battle view interface (untested),0x4A
+Start game okay?,0x4B
+Text box with spinner,0x4C
+Drift Explanation Message Box,0x4D
+Vote/Random Message Box,0x4E
+Reading ghost data/screen with text + spinner,0x4F
+Connecting to Nintendo WFC...,0x50
+"Generic text box, full screen, press A",0x51
+Text box with one prompt (Multiple uses),0x52
+Post photo to Wii Message Board?,0x53
+Behind main menu?,0x54
+Dummy? Maybe not low battery. Goes to 5A?,0x55
+Low battery notification,0x56
+Title Screen,0x57
+Behind main menu?,0x58
+Opening Movie,0x59
+Main Menu,0x5A
+Behind unlocks?,0x5B
+Flag background,0x5C
+Behind Disconnects/Options,0x5D
+Top menu overlay,0x5E
+Blinking press A,0x5F
+Select Mii,0x60
+Active controller display,0x61
+Player controller opt in,0x62
+Pair Wii Remotes,0x63
+Player controller opt in complete (OK/Change),0x64
+License Select,0x65
+Mii Changed,0x66
+License Settings,0x67
+Erase License,0x68
+Single Player Menu,0x69
+Grand Prix Class Select,0x6A
+Character Select,0x6B
+Vehicle Select,0x6C
+Drift Select,0x6D
+Cup Select,0x6E
+Course Select (sub screen),0x6F
+Select Ghost,0x70
+Select Ghost,0x71
+Select Solo/Team VS,0x72
+Select Race Rules,0x73
+Teams Overview,0x74
+Select Battle Mode,0x75
+Select Vehicle (Battle),0x76
+Select Battle Rules,0x77
+Select Battle Cup,0x78
+Select Battle Course,0x79
+Mission Level Select (Unused),0x7A
+Mission Select (sub screen),0x7B
+Mission Information Prompt,0x7C
+Drift Select with one option,0x7D
+Mission Tutorial,0x7E
+Present on single player menus,0x7F
+Multiplayer Menu (VS/BT),0x80
+Multiplayer Vehicle Select,0x81
+Multiplayer Drift Select,0x82
+Multiplayer Team Select,0x83
+part of connecting...?,0x84
+WFC first play,0x85
+Allow data to be sent?,0x86
+Disconnects you,0x87
+Seems to draw behind online races (panel 2),0x88
+Error connecting to WFC,0x89
+Dummy? Seems to redirect to 0x52.,0x8A
+WFC Menu,0x8B
+WFC VS/Battle Select,0x8C
+Friends Menu,0x8D
+Friends Menu (Mario Kart Channel),0x8E
+Global Search Manager (doesn't render),0x8F
+Timer,0x90
+Player List (VR Screen),0x91
+Course/Stage Votes,0x92
+Present in live view?,0x93
+Present in online race?,0x94
+Present in online menus?,0x95
+Friend Roster,0x96
+Not Friends Yet,0x97
+Remove Friend Code,0x98
+Removing Friend Code...,0x99
+Seems to prepare the Friends list,0x9A
+"Friend Room ""waiting"" text",0x9B
+Friend Room Manager (doesn't render),0x9C
+Friend Room,0x9D
+Friend Room Messages,0x9E
+Mario Kart Channel,0xA2
+Rankings Menu,0xA3
+Channel Ghosts Screen,0xA4
+Dummy? Loads 0xA6,0xA5
+Enter FC,0xA6
+Ghost List Manager (doesn't render),0xA7
+Mario Kart Channel ghost histogram screen,0xA8
+Mario Kart Channel behind 0xAD,0xAC
+Mario Kart Channel with a selected ghost (challenge/watch),0xAD
+"Resides behind 0x4F, loads 0xB4",0xB3
+Mario Kart Channel Downloaded Ghost List,0xB4
+Mario Kart Channel Erase Ghost,0xB5
+Competition for Wii Wheels only,0xBA
+Options,0xC0
+Nintendo Wi-Fi Connection options,0xC1
+"Information box with ""Next"", can chain to self",0xC2
+Information box with 2 buttons prompt.,0xC3
+Information box with 3 prompts. (???),0xC4
+Return to system menu to set region?,0xC5
+Flag/Region Display,0xC6
+Large info box with spinner,0xC7
+Large info box with A prompt,0xC8
+Info box with OK prompt,0xC9
+Add Mario Kart Channel,0xCA
+Add Mario Kart Channel prompt,0xCB
+Draws beneath Options menu,0xCC
+Overall Records,0xCE
+Favourites,0xCF
+Friend Records,0xD0
+WFC Records,0xD1
+Other Records,0xD2

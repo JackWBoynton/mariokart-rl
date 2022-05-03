@@ -1,0 +1,32 @@
+﻿0x00,A,Road,1,0.7
+0x01,A,Slippery Road 1,1,0.050 – 0.105
+0x02,A,Weak Off-road,0.550 – 0.909,0.080 – 0.157
+0x03,A,Off-road,0.325 – 0.712,0.050 – 0.105
+0x04,A,Heavy Off-road,0.185 – 0.422,0.050 – 0.105
+0x05,A,Slippery Road 2,0.881 – 0.999,0.030 – 0.074
+0x06,A,Boost Pad,1,0.7
+0x07,A,Boost Ramp,1,0.7
+0x08,A,Jump Pad,1,0.7
+0x09,A,Item Road,1,0.7
+0x0A,A,Solid Fall,0.1,0.7
+0x0B,B,Moving Water,1,0.7
+0x0C,unknown,Wall,1,0.7
+0x0D,unknown,Invisible Wall,1,0.7
+0x0E,unknown,Item Wall,1,0.7
+0x0F,unknown,Wall 3,1,0.7
+0x10,unknown,Fall Boundary,1,0.7
+0x11,B,Cannon Activator,1,0.7
+0x12,unknown,Force Recalculation,1,0.7
+0x13,unknown,Half-pipe Ramp,1,0.7
+0x14,unknown,Wall,1,0.7
+0x15,B,Moving Road,1,0.7
+0x16,A,Sticky/Gravity Road,1,0.7
+0x17,A,Road,1,0.7
+0x18,unknown,Sound Trigger,1,0.7
+0x19,unknown,Unknown,1,0.7
+0x1A,unknown,Effect Trigger,1,0.7
+0x1B,unknown,Item State Modifier,1,0.7
+0x1C,unknown,Half-pipe Invisible Wall,1,0.7
+0x1D,A,Moving Road,1,0.7
+0x1E,unknown,Special Walls,1,0.7
+0x1F,unknown,Wall 5,1,0.7

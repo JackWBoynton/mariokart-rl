@@ -1,0 +1,36 @@
+﻿Standard Kart S,0x00,sdf_kart
+Standard Kart M,0x01,mdf_kart
+Standard Kart L,0x02,ldf_kart
+Booster Seat,0x03,sa_kart
+Classic Dragster,0x04,ma_kart
+Offroader,0x05,la_kart
+Mini Beast,0x06,sb_kart
+Wild Wing,0x07,mb_kart
+Flame Flyer,0x08,lb_kart
+Cheep Charger,0x09,sc_kart
+Super Blooper,0x0A,mc_kart
+Piranha Prowler,0x0B,lc_kart
+Tiny Titan,0x0C,sd_kart
+Daytripper,0x0D,md_kart
+Jetsetter,0x0E,ld_kart
+Blue Falcon,0x0F,se_kart
+Sprinter,0x10,me_kart
+Honeycoupe,0x11,le_kart
+Standard Bike S,0x12,sdf_bike
+Standard Bike M,0x13,mdf_bike
+Standard Bike L,0x14,ldf_bike
+Bullet Bike,0x15,sa_bike
+Mach Bike,0x16,ma_bike
+Flame Runner,0x17,la_bike
+Bit Bike,0x18,sb_bike
+Sugarscoot,0x19,mb_bike
+Wario Bike,0x1A,lb_bike
+Quacker,0x1B,sc_bike
+Zip Zip,0x1C,mc_bike
+Shooting Star,0x1D,lc_bike
+Magikruiser,0x1E,sd_bike
+Sneakster,0x1F,md_bike
+Spear,0x20,ld_bike
+Jet Bubble,0x21,se_bike
+Dolphin Dasher,0x22,me_bike
+Phantom,0x23,le_bike

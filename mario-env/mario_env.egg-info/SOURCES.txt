@@ -1,0 +1,7 @@
+README.md
+setup.py
+mario_env.egg-info/PKG-INFO
+mario_env.egg-info/SOURCES.txt
+mario_env.egg-info/dependency_links.txt
+mario_env.egg-info/requires.txt
+mario_env.egg-info/top_level.txt
