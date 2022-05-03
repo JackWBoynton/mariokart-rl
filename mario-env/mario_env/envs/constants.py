@@ -2,7 +2,7 @@ import pickle, joblib
 import os
 
 DOLPHIN_CONF_DIR = '/Users/jackboynton/Library/Application Support/Dolphin/'
-DOLPHIN_DIR = "/Users/jackboynton/mariokart_new/dolphin/build/Binaries/Dolphin.app/Contents/MacOS/Dolphin"
+DOLPHIN_DIR = "/Users/jackboynton/tmp/dolphin/build/Binaries/Dolphin.app/Contents/MacOS/Dolphin"
 
 MEMORY_LOCATIONS = os.path.join(DOLPHIN_CONF_DIR, "MemoryWatcher/Locations.txt")
 CONTROLLER_CONTROL_PATH = os.path.join(DOLPHIN_CONF_DIR, "Pipes/p3")
@@ -23,9 +23,13 @@ MAX_RACETIME = 5 # 5 minutes max
 MIN_VELOCITY = 0.5 
 LAP_REWARD_SCALE = 100 
 STATE_LOOKBACK = 10 # look at 10 previous states per step
-
-with open("centertraj.pkl", "rb") as f:
-    CENTER_TRAJ = pickle.load(f)
+try:
+    with open("centertraj.pkl", "rb") as f:
+        CENTER_TRAJ = pickle.load(f)
+except:
+    CENTER_TRAJ = None
+    LEFT_TRAJ = None
+    RIGHT_TRAJ = None
 
 TRAJ_CMAP = {"left": (0.0, 0.0, 1.0), "right": (0.0, 0.0, 1.0), "center": (0.0, 1.0, 1.0), "pos": (0.0, 1.0, 0.0)}
 

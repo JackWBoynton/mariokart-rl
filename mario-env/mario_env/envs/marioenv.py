@@ -138,7 +138,7 @@ def load_previous_trajectories():
 class MarioEnv(gym.Env):
     metadata = {"render.modes": ["human"]}
 
-    def __init__(self, config={"visualization": 1, "expert": {"on": 1, "filename": "./centerline_traj.npy"}}) -> None:
+    def __init__(self, config={"visualization": 0, "expert": {"on": 1, "filename": "./centerline_traj.npy"}}) -> None:
         super().__init__()
         self.dolphin = None
         self.controller = None
@@ -146,11 +146,12 @@ class MarioEnv(gym.Env):
         self.vis = None
         self.vis_queue = None
 
-        left_traj, center_traj, right_traj = load_previous_trajectories()
-        
         self.current_traj = Trajectory(name="pos")
 
         if config["visualization"] == 1:
+
+            left_traj, center_traj, right_traj = load_previous_trajectories()
+        
             self.vis_queue = queue.Queue()
             self.vis = Visualizer(self.vis_queue)
             self.vis.start() # start visualizer thread
@@ -243,6 +244,20 @@ class MarioEnv(gym.Env):
         return math.sqrt(dx ** 2 + dy ** 2 + dz ** 2)
 
     def dirr(self, trajx, trajy, trajz, trajxx, trajyy, trajzz, dd = 1):
+        """return the trajectory dot product of trajx, trajy, trajz @ trajxx, trajyy, trajzz
+
+        Args:
+            trajx (_type_): _description_
+            trajy (_type_): _description_
+            trajz (_type_): _description_
+            trajxx (_type_): _description_
+            trajyy (_type_): _description_
+            trajzz (_type_): _description_
+            dd (int, optional): _description_. Defaults to 1.
+
+        Returns:
+            _type_: _description_
+        """
         out = 0
         trajx, trajy, trajz = trajx[:len(trajxx)], trajy[:len(trajxx)], trajz[:len(trajxx)]
 
@@ -276,6 +291,14 @@ class MarioEnv(gym.Env):
 
 
     def vec3_speed(self, state):
+        """find the speed of kart at a given state
+
+        Args:
+            state (np.ndarray): State object representated as a numpy array
+
+        Returns:
+            float: velocity of the kart given State state
+        """
         x, y, z = state[OUT_NP_STATE_NAMES_MAP["xpos"]], state[OUT_NP_STATE_NAMES_MAP["ypos"]], state[OUT_NP_STATE_NAMES_MAP["zpos"]]
         x_, y_, z_ = state[OUT_NP_STATE_NAMES_MAP["prev_xpos"]], state[OUT_NP_STATE_NAMES_MAP["prev_ypos"]], state[OUT_NP_STATE_NAMES_MAP["prev_zpos"]]
         return math.sqrt(abs(x - x_)**2 + abs(y - y_)**2 + abs(z - z_)**2)
