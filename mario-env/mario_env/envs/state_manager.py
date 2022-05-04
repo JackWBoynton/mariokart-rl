@@ -127,7 +127,7 @@ class StateManager:
 
         playerbase = 0x809C18F8
         raceData2 = str(hex(0x809BD730))[2:] + " C" + " 0"
-        PosPointer = str(hex(0x9C2EF8 + 0x80000000))[2:] + " 40"
+        PosPointer = str(hex(0x809C2EF8))[2:] + " 40"
         controllerData = str(hex(0x809BD70C))[2:]
 
         menu = str(hex(0x809C2850))[2:]  # correct

@@ -2,16 +2,14 @@ import pickle, joblib
 import os
 import numpy as np
 
-DOLPHIN_CONF_DIR = "/Users/jackboynton/Library/Application Support/Dolphin/"
-DOLPHIN_DIR = (
-    "/Users/jackboynton/tmp/dolphin/build/Binaries/Dolphin.app/Contents/MacOS/Dolphin"
-)
+DOLPHIN_CONF_DIR = os.environ.get("DOLPHIN_CONF_DIR")
+DOLPHIN_DIR = os.environ.get("DOLPHIN_DIR")
+MK_ISO = os.environ.get("MK_ISO")
 
 MEMORY_LOCATIONS = os.path.join(DOLPHIN_CONF_DIR, "MemoryWatcher/Locations.txt")
 CONTROLLER_CONTROL_PATH = os.path.join(DOLPHIN_CONF_DIR, "Pipes/p3")
 CONTROLLER_HOTKEY_PATH = os.path.join(DOLPHIN_CONF_DIR, "Pipes/p4")
 
-MK_ISO = "/Users/jackboynton/mk.iso"
 
 XMIN, XMAX = -27077.66796875, 22791.869140625
 YMIN, YMAX = 496.66680908203125, 4287.50537109375
@@ -46,15 +44,9 @@ LAP_REWARD_SCALE = 100
 STATE_LOOKBACK = 10  # look at 10 previous states per step
 try:
     print("loading track trajectories...")
-    CENTER_TRAJ = np.load(
-        "/Users/jackboynton/mariokart-rl/mario-env/mario_env/envs/centerline_traj.npy"
-    )
-    RIGHT_TRAJ = np.load(
-        "/Users/jackboynton/mariokart-rl/mario-env/mario_env/envs/righttraj.npy"
-    )
-    LEFT_TRAJ = np.load(
-        "/Users/jackboynton/mariokart-rl/mario-env/mario_env/envs/lefttraj.npy"
-    )
+    CENTER_TRAJ = np.load(os.environ.get("CENTER_TRAJ"))
+    RIGHT_TRAJ = np.load(os.environ.get("RIGHT_TRAJ"))
+    LEFT_TRAJ = np.load(os.environ.get("LEFT_TRAJ"))
     print("loaded track trajectories")
 except Exception as e:
     print(e)
