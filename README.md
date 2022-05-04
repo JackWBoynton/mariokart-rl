@@ -39,7 +39,6 @@
   * `Hotkeys.ini` -> `~/Library/Application Support/Dolphin/Config/`
   * `Profiles/*` -> `~/Library/Application Support/Dolphin/Config/`
 
-
 ### Monitored RAM Locations
 
 PAL Version of MKwii
@@ -67,6 +66,18 @@ PAL Version of MKwii
 [MarioKart Wii Symbol Map](https://docs.google.com/spreadsheets/d/1gA5WmnEbPAeA1Lq4XUJg9qDwawky9hpNUv2n1wWRwno/edit#gid=1610171642)
 
 ### Usage
+
+Environment Variables:
+
+* Set `DOLPHIN_CONF_DIR` to the Dolphin Emulator User directory (MacOS : `~/Library/Application Support/Dolphin`)
+* Set `DOLPHIN_DIR` to the location of the Dolphin Binary (ex: `dolphin/build/Binaries/Dolphin.app/Contents/MacOS/Dolphin`)
+* Set `MK_ISO` to the location of the game iso
+
+In-Progress:
+
+* `CENTER_TRAJ` 3D trajectory for driving on the centerline (`centerline_traj.npy`)
+* `LEFT_TRAJ` 3D trajectory for driving on the left side of the track (`lefttraj.npy`)
+* `RIGHT_TRAJ` 3D trajectory for driving on the right side of the track (`righttraj.npy`)
 
 ```bash
 python3 -m pip install -e mario-env
