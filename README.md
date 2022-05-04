@@ -33,6 +33,11 @@
         * Houses logic to send controller commands and hotkeys to Dolphin Emulator
       * `constants.py`
         * Configuration options
+* `dolphin_configs`
+  * `Dolphin.ini` -> `~/Library/Application Support/Dolphin/Config/`
+  * `GCPadNew.ini` -> `~/Library/Application Support/Dolphin/Config/`
+  * `Hotkeys.ini` -> `~/Library/Application Support/Dolphin/Config/`
+  * `Profiles/*` -> `~/Library/Application Support/Dolphin/Config/`
 
 ### Usage
 
