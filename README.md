@@ -6,7 +6,7 @@
 * `numpy`
 * `OpenGL` for vis
 * `Pangolin` for vis: [Pangolin](https://github.com/JackWBoynton/pangolin)
-* `Dolphin >=5.0` [Dolphin Emulator](https://github.com/JackWBoynton/dolphin) (my fork for hotkey automation)
+* `Dolphin >= 5.0` [Dolphin Emulator](https://github.com/JackWBoynton/dolphin) (my fork required for hotkey automation)
 
 ## OpenAI Gym Environment
 
@@ -53,6 +53,7 @@ env.reset()
 ## TODO
 
 * Use trajectories of edges of the road to determine if kart is on the track or not
+  * It seems that the x, z coordinates correspond to the 2D movement along the track and y is the elevation
 * Save trajectories for offline visualization
 * Update Dolphin Emulator to allow for unix fifo pipe frame dumps
   * Train object detection model to detect obstacles in the road for grand prix races
