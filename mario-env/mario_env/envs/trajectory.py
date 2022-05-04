@@ -50,3 +50,15 @@ class Trajectory:
 
     def pangolin_pts(self):
         return self.xs, self.ys, self.zs
+
+    @staticmethod
+    def is_bounded(self, trajx, trajy):
+        current_pos = self.xs[-1], self.ys[-1], self.zs[-1]
+
+        # 2D (x, y, z) -> (x, z)
+        x, z = current_pos[0], current_pos[2]
+
+        # horizontal line L
+        
+
+        

@@ -376,7 +376,6 @@ OUT_NP_STATE_NAMES = ["minutes", "seconds", "thirdseconds", "xpos", "ypos", "zpo
 
 OUT_NP_STATE_NAMES_MAP = {y: x for x, y in enumerate(OUT_NP_STATE_NAMES)}
 
-@dataclass
 class State:
     """Databag that is handled by StateManager."""
     def __init__(self):

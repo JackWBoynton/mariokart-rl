@@ -63,3 +63,48 @@ class Visualizer(object):
 
     def paint(self, trajs):
         self.q.put(trajs)
+
+
+# class 2DVisualizer(object):
+#     def __init__(self):
+#         self.state = None
+#         self.q = Queue()
+#         self.vp = Process(target=self.viewer_thread, args=(self.q,))
+#         self.vp_daemon = True
+#         self.vp.start()
+
+#     def viewer_thread(self, q):
+#         self.viewer_init(1024, 768)
+#         while 1:
+#             self.viewer_refresh(q)
+#     def viewer_init(self, w, h):
+#         pangolin.CreateWindowAndBind("2D Trajectory Visualization", w, h)
+#         gl.glEnable(gl.GL_DEPTH_TEST)
+
+#         tinc = 0.03
+#         self.plotter = pangolin.Plotter(log, 0.0, 4.0*np.pi/tinc, -2.0, 2.0, np.pi/(4*tinc), 0.5)
+#         self.plotter.SetBounds(0.0, 1.0, 0.0, 1.0)
+#         self.plotter.Track('$i')
+
+#     def viewer_refresh(self, q):
+#         while not q.empty():
+#             self.state = q.get()
+#             gl.glClear(gl.GL_COLOR_BUFFER_BIT | gl.GL_DEPTH_BUFFER_BIT)
+#             gl.glClearColor(0.0, 0.0, 0.0, 1.0)
+#             self.dcam.Activate(self.scam)
+
+#             if self.state is not None:
+#                 if isinstance(self.state, list):
+#                     for traj in self.state:
+#                         xs, ys, zs = traj.pangolin_pts()
+#                         if len(xs) > 0:
+#                             gl.glPointSize(3) if traj.name == "pos" else gl.glPointSize(1)
+#                             gl.glColor3f(*TRAJ_CMAP[traj.name])
+#                             pts = np.asarray(list(zip(xs, ys, zs)))
+#                             pangolin.DrawPoints(pts)
+
+#                     pangolin.FinishFrame()
+#                 # might add other stuff here i guess...
+
+#     def paint(self, trajs):
+#         self.q.put(trajs)
