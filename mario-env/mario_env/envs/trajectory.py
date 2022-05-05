@@ -9,29 +9,28 @@ class Trajectory:
         self.xs, self.ys, self.zs = [], [], []
         self.writeable = writeable
 
-        if len(x) and env is None:
-            assert len(x) == len(y) == len(z), "x, y, z must be the same length"
-            if not (sum([min(x), min(y), min(z)]) >= 0 and sum([max(x), max(y), max(z)]) <= 3):
-                x, y, z = Trajectory.norm(x, y, z)
-            self.xs, self.ys, self.zs = x, y, z
-        elif env is not None:
-            self.xs, self.ys, self.zs = env
+        if env:
+            x, y, z = env
+        
+        self.update(x, y, z, force=1)
+            
 
-    def update(self, x, y, z):
-        assert self.writeable, f"Trajectory {self.name} is not writable"
+    def update(self, x, y, z, force=0):
+        if not force: assert self.writeable, f"Trajectory {self.name} is not writable"
         if isinstance(x, list):
-            assert (
-                len(x) == len(y) == len(z)
-                and sum([min(x), min(y), min(z)]) >= 0
-                and sum([max(x), max(y), max(z)]) <= 3
-            ), "x, y, z must be normalized and the same length"
+            assert len(x) == len(y) == len(z), "x, y, z must be the same length"
             self.xs += x
             self.ys += y
             self.zs += z
+            
         else:
             self.xs += [x]
             self.ys += [y]
             self.zs += [z]
+
+        self.xs, self.ys, self.zs = Trajectory.check_norm(self.xs, self.ys, self.zs)
+
+        return None
 
     def get_pts_in_3d_box(self, box):
         bxmin, bxmax, bymin, bymax, bzmin, bzmax = box
@@ -61,19 +60,22 @@ class Trajectory:
         # horizontal line L
     
     @staticmethod
-    def norm(x=None, y=None, z=None, np_traj=None):
-        if np_traj is not None:
+    def check_norm(x=None, y=None, z=None, np_traj=None):
+        trajx = x
+        trajy = y
+        trajz = z
+
+        if not np_traj:
             trajx = [float(x[-1]) for x in np_traj if x[0] == "xpos"]
             trajy = [float(x[-1]) for x in np_traj if x[0] == "ypos"]
             trajz = [float(x[-1]) for x in np_traj if x[0] == "zpos"]
-        elif x is not None:
-            trajx = x
-            trajy = y
-            trajz = z
+            
         m = min([len(trajx), len(trajy), len(trajz)])
-        trajx = (np.array(trajx[:m]) - XMIN) / (XMAX - XMIN)
-        trajy = (np.array(trajy[:m]) - YMIN) / (YMAX - YMIN)
-        trajz = (np.array(trajz[:m]) - ZMIN) / (ZMAX - ZMIN)
+        if not (sum([min(trajx), min(trajy), min(trajz)]) >= 0 and sum([max(trajx), max(trajy), max(trajz)]) <= 3):
+
+            trajx = (np.array(trajx[:m]) - XMIN) / (XMAX - XMIN)
+            trajy = (np.array(trajy[:m]) - YMIN) / (YMAX - YMIN)
+            trajz = (np.array(trajz[:m]) - ZMIN) / (ZMAX - ZMIN)
 
         return trajx, trajy, trajz
         
