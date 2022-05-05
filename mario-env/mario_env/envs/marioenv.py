@@ -124,19 +124,6 @@ class Controller:
         else:
             return False
 
-
-def load_traj(traj):
-    trajx = [float(x[-1]) for x in traj if x[0] == "xpos"]
-    trajy = [float(x[-1]) for x in traj if x[0] == "ypos"]
-    trajz = [float(x[-1]) for x in traj if x[0] == "zpos"]
-    m = min([len(trajx), len(trajy), len(trajz)])
-    trajx = (np.array(trajx[:m]) - XMIN) / (XMAX - XMIN)
-    trajy = (np.array(trajy[:m]) - YMIN) / (YMAX - YMIN)
-    trajz = (np.array(trajz[:m]) - ZMIN) / (ZMAX - ZMIN)
-
-    return trajx, trajy, trajz
-
-
 def load_previous_trajectories():
     # center
     trajx, trajy, trajz = load_traj(CENTER_TRAJ)
@@ -147,7 +134,7 @@ def load_previous_trajectories():
     left_traj = Trajectory(name="left", x=trajx, y=trajy, z=trajz, writeable=False)
     print(f"left_traj: {len(left_traj)}")
     # right
-    trajx, trajy, trajz = load_traj(RIGHT_TRAJ)
+    trajx, trajy, trajz = RIGHT_TRAJ
     right_traj = Trajectory(name="right", x=trajx, y=trajy, z=trajz, writeable=False)
     print(f"right_traj: {len(right_traj)}")
 

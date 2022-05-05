@@ -1,6 +1,7 @@
 import pickle, joblib
 import os
 import numpy as np
+from .trajectory import Trajectory
 
 DOLPHIN_CONF_DIR = os.environ.get("DOLPHIN_CONF_DIR")
 DOLPHIN_DIR = os.environ.get("DOLPHIN_DIR")
@@ -42,11 +43,13 @@ MAX_RACETIME = 5  # 5 minutes max
 MIN_VELOCITY = 0.5
 LAP_REWARD_SCALE = 100
 STATE_LOOKBACK = 10  # look at 10 previous states per step
+
+
 try:
-    print("loading track trajectories...")
-    CENTER_TRAJ = np.load(os.environ.get("CENTER_TRAJ"))
-    RIGHT_TRAJ = np.load(os.environ.get("RIGHT_TRAJ"))
-    LEFT_TRAJ = np.load(os.environ.get("LEFT_TRAJ"))
+    print("loading track trajectories...") 
+    CENTER_TRAJ = Trajectory(normtraj(name="center", env=np.load(os.environ.get("CENTER_TRAJ"))), writeable=False)
+    RIGHT_TRAJ = Trajectory(normtraj(name="center", env=np.load(os.environ.get("CENTER_TRAJ"))), writeable=False)
+    LEFT_TRAJ = Trajectory(normtraj(name="center", env=np.load(os.environ.get("CENTER_TRAJ"))), writeable=False)
     print("loaded track trajectories")
 except Exception as e:
     print(e)
