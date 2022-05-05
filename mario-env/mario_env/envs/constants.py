@@ -1,7 +1,7 @@
 import pickle, joblib
 import os
 import numpy as np
-from .trajectory import Trajectory
+
 
 DOLPHIN_CONF_DIR = os.environ.get("DOLPHIN_CONF_DIR")
 DOLPHIN_DIR = os.environ.get("DOLPHIN_DIR")
@@ -44,12 +44,20 @@ MIN_VELOCITY = 0.5
 LAP_REWARD_SCALE = 100
 STATE_LOOKBACK = 10  # look at 10 previous states per step
 
+TRAJ_CMAP = {
+    "left": (1.0, 0.0, 0.0),
+    "right": (0.0, 1.0, 0.0),
+    "center": (0.0, 1.0, 1.0),
+    "pos": (0.0, 0.0, 1.0),
+}
+
+from mario_env.envs.trajectory import Trajectory
 
 try:
     print("loading track trajectories...") 
-    CENTER_TRAJ = Trajectory(normtraj(name="center", env=np.load(os.environ.get("CENTER_TRAJ"))), writeable=False)
-    RIGHT_TRAJ = Trajectory(normtraj(name="right", env=np.load(os.environ.get("RIGHT_TRAJ"))), writeable=False)
-    LEFT_TRAJ = Trajectory(normtraj(name="left", env=np.load(os.environ.get("LEFT_TRAJ"))), writeable=False)
+    CENTER_TRAJ = Trajectory(name="center", env=np.load(os.environ.get("CENTER_TRAJ")), writeable=False)
+    RIGHT_TRAJ = Trajectory(name="right", env=np.load(os.environ.get("RIGHT_TRAJ")), writeable=False)
+    LEFT_TRAJ = Trajectory(name="left", env=np.load(os.environ.get("LEFT_TRAJ")), writeable=False)
     print("loaded track trajectories")
 except Exception as e:
     print(e)
@@ -57,9 +65,3 @@ except Exception as e:
     LEFT_TRAJ = None
     RIGHT_TRAJ = None
 
-TRAJ_CMAP = {
-    "left": (1.0, 0.0, 0.0),
-    "right": (0.0, 1.0, 0.0),
-    "center": (0.0, 1.0, 1.0),
-    "pos": (0.0, 0.0, 1.0),
-}

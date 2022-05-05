@@ -4,7 +4,7 @@ import pangolin
 import threading
 from multiprocessing import Process, Queue
 
-from .constants import *
+from .constants import TRAJ_CMAP
 
 import logging
 

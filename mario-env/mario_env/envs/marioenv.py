@@ -124,22 +124,6 @@ class Controller:
         else:
             return False
 
-def load_previous_trajectories():
-    # center
-    trajx, trajy, trajz = load_traj(CENTER_TRAJ)
-    center_traj = Trajectory(name="center", x=trajx, y=trajy, z=trajz, writeable=False)
-    print(f"center_traj: {len(center_traj)}")
-    # left
-    trajx, trajy, trajz = load_traj(LEFT_TRAJ)
-    left_traj = Trajectory(name="left", x=trajx, y=trajy, z=trajz, writeable=False)
-    print(f"left_traj: {len(left_traj)}")
-    # right
-    trajx, trajy, trajz = RIGHT_TRAJ
-    right_traj = Trajectory(name="right", x=trajx, y=trajy, z=trajz, writeable=False)
-    print(f"right_traj: {len(right_traj)}")
-
-    return left_traj, center_traj, right_traj
-
 
 class MarioEnv(gym.Env):
     metadata = {"render.modes": ["human"]}
@@ -158,16 +142,9 @@ class MarioEnv(gym.Env):
 
         if config["visualization"] == 1:
 
-            (
-                self.left_traj,
-                self.center_traj,
-                self.right_traj,
-            ) = load_previous_trajectories()
-
             self.vis = Visualizer()
 
-            self.vis.paint([self.left_traj, self.right_traj, self.center_traj])
-            self.first_vis = True
+            self.vis.paint([LEFT_TRAJ, RIGHT_TRAJ, CENTER_TRAJ])
 
         self.action_space = spaces.Box(low=0.0, high=1.0, dtype=np.float32, shape=(17,))
         self.observation_space = spaces.Box(
@@ -205,10 +182,8 @@ class MarioEnv(gym.Env):
         self.update_current_traj(new_state)  # update curr_traj
 
         if self.vis:
-            if self.first_vis:
-                self.first_vis = True
             self.vis.paint(
-                [self.current_traj, self.left_traj, self.right_traj, self.center_traj]
+                [self.current_traj, LEFT_TRAJ, RIGHT_TRAJ, CENTER_TRAJ]
             )  # update current_traj on plot
 
         if new_state is not None:

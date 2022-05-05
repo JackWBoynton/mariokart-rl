@@ -1,7 +1,6 @@
 import numpy as np
 from .constants import *
 
-
 class Trajectory:
     def __init__(self, name, x=[], y=[], z=[], env=None, writeable=True):
         assert name in TRAJ_CMAP.keys(), f"name: {name} not in TRAJ_CMAP"
@@ -9,19 +8,20 @@ class Trajectory:
         self.xs, self.ys, self.zs = [], [], []
         self.writeable = writeable
 
-        if env:
-            x, y, z = env
+        if env is not None:
+            
+            x, y, z = Trajectory.check_norm(np_traj=env)
         
         self.update(x, y, z, force=1)
             
 
     def update(self, x, y, z, force=0):
         if not force: assert self.writeable, f"Trajectory {self.name} is not writable"
-        if isinstance(x, list):
+        if isinstance(x, list) or isinstance(x, np.ndarray):
             assert len(x) == len(y) == len(z), "x, y, z must be the same length"
-            self.xs += x
-            self.ys += y
-            self.zs += z
+            self.xs = np.concatenate((self.xs, x))
+            self.ys = np.concatenate((self.ys, y))
+            self.zs = np.concatenate((self.zs, z))
             
         else:
             self.xs += [x]
@@ -65,11 +65,11 @@ class Trajectory:
         trajy = y
         trajz = z
 
-        if not np_traj:
+        if np_traj is not None:
             trajx = [float(x[-1]) for x in np_traj if x[0] == "xpos"]
             trajy = [float(x[-1]) for x in np_traj if x[0] == "ypos"]
             trajz = [float(x[-1]) for x in np_traj if x[0] == "zpos"]
-            
+
         m = min([len(trajx), len(trajy), len(trajz)])
         if not (sum([min(trajx), min(trajy), min(trajz)]) >= 0 and sum([max(trajx), max(trajy), max(trajz)]) <= 3):
 
