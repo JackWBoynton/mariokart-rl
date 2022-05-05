@@ -48,8 +48,8 @@ STATE_LOOKBACK = 10  # look at 10 previous states per step
 try:
     print("loading track trajectories...") 
     CENTER_TRAJ = Trajectory(normtraj(name="center", env=np.load(os.environ.get("CENTER_TRAJ"))), writeable=False)
-    RIGHT_TRAJ = Trajectory(normtraj(name="center", env=np.load(os.environ.get("CENTER_TRAJ"))), writeable=False)
-    LEFT_TRAJ = Trajectory(normtraj(name="center", env=np.load(os.environ.get("CENTER_TRAJ"))), writeable=False)
+    RIGHT_TRAJ = Trajectory(normtraj(name="right", env=np.load(os.environ.get("RIGHT_TRAJ"))), writeable=False)
+    LEFT_TRAJ = Trajectory(normtraj(name="left", env=np.load(os.environ.get("LEFT_TRAJ"))), writeable=False)
     print("loaded track trajectories")
 except Exception as e:
     print(e)
