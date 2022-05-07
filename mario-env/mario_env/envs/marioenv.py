@@ -7,6 +7,7 @@ import queue
 import math
 import joblib
 import threading
+from shapely.geometry import Point
 
 from .threaded_mw import MemoryWatcherThread
 from .pad import Pad, Button, Stick
@@ -15,7 +16,7 @@ from .state_manager import StateManager
 from .state import State
 from .trajectory import Trajectory
 from .constants import *
-from .pangolin_handler import Visualizer
+from .pangolin_handler import Visualizer, DDVisualizer
 
 import logging
 
@@ -141,10 +142,11 @@ class MarioEnv(gym.Env):
         self.current_traj = Trajectory(name="pos")
 
         if config["visualization"] == 1:
+            self.ddvis = DDVisualizer()
+            # self.vis = Visualizer()
 
-            self.vis = Visualizer()
-
-            self.vis.paint([LEFT_TRAJ, RIGHT_TRAJ, CENTER_TRAJ])
+            # self.vis.paint([LEFT_TRAJ, RIGHT_TRAJ, CENTER_TRAJ])
+            self.ddvis.paint([LEFT_TRAJ, RIGHT_TRAJ])
 
         self.action_space = spaces.Box(low=0.0, high=1.0, dtype=np.float32, shape=(17,))
         self.observation_space = spaces.Box(
@@ -180,16 +182,19 @@ class MarioEnv(gym.Env):
         new_state = new_state[:, 0]
 
         self.update_current_traj(new_state)  # update curr_traj
+        curr_point = Point(new_state[OUT_NP_STATE_NAMES_MAP["xpos"]], new_state[OUT_NP_STATE_NAMES_MAP["zpos"]])
+        if 1:
+            # self.vis.paint(
+            #     [self.current_traj, LEFT_TRAJ, RIGHT_TRAJ, CENTER_TRAJ]
+            # )  # update current_traj on plot
+            # print(new_state[OUT_NP_STATE_NAMES_MAP["xpos"]], new_state[OUT_NP_STATE_NAMES_MAP["zpos"]])
+            self.ddvis.paint(curr_point)
+        
+        print(Trajectory.on_road(point=curr_point, ltraj=LEFT_TRAJ, rtraj=RIGHT_TRAJ))
 
-        if self.vis:
-            self.vis.paint(
-                [self.current_traj, LEFT_TRAJ, RIGHT_TRAJ, CENTER_TRAJ]
-            )  # update current_traj on plot
+        # print(Trajectory.on_road(self.current_traj.numpy_pts()[-1], LEFT_TRAJ, RIGHT_TRAJ))
 
         if new_state is not None:
-
-            # print(str(new_state))
-
             if (
                 new_state[OUT_NP_STATE_NAMES_MAP["current_lap_completion"]] >= 1
                 and new_state[OUT_NP_STATE_NAMES_MAP["current_lap_completion"]] < 2

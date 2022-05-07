@@ -53,15 +53,9 @@ TRAJ_CMAP = {
 
 from mario_env.envs.trajectory import Trajectory
 
-try:
-    print("loading track trajectories...") 
-    CENTER_TRAJ = Trajectory(name="center", env=np.load(os.environ.get("CENTER_TRAJ")), writeable=False)
-    RIGHT_TRAJ = Trajectory(name="right", env=np.load(os.environ.get("RIGHT_TRAJ")), writeable=False)
-    LEFT_TRAJ = Trajectory(name="left", env=np.load(os.environ.get("LEFT_TRAJ")), writeable=False)
-    print("loaded track trajectories")
-except Exception as e:
-    print(e)
-    CENTER_TRAJ = None
-    LEFT_TRAJ = None
-    RIGHT_TRAJ = None
+print("loading track trajectories...") 
+CENTER_TRAJ = Trajectory(name="center", env=np.load(os.environ.get("CENTER_TRAJ")), writeable=False)
+RIGHT_TRAJ = Trajectory(name="right", env=np.load(os.environ.get("RIGHT_TRAJ")), writeable=False)
+LEFT_TRAJ = Trajectory(name="left", env=np.load(os.environ.get("LEFT_TRAJ")), writeable=False)
+print("loaded track trajectories")
 

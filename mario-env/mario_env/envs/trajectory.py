@@ -1,4 +1,7 @@
 import numpy as np
+from shapely.geometry.polygon import Polygon
+from shapely.geometry import Point
+from descartes import PolygonPatch
 from .constants import *
 
 class Trajectory:
@@ -12,7 +15,8 @@ class Trajectory:
             
             x, y, z = Trajectory.check_norm(np_traj=env)
         
-        self.update(x, y, z, force=1)
+        if len(x):
+            self.update(x, y, z, force=1)
             
 
     def update(self, x, y, z, force=0):
@@ -29,7 +33,7 @@ class Trajectory:
             self.zs += [z]
 
         self.xs, self.ys, self.zs = Trajectory.check_norm(self.xs, self.ys, self.zs)
-
+        
         return None
 
     def get_pts_in_3d_box(self, box):
@@ -48,7 +52,10 @@ class Trajectory:
         return len(self.xs)
 
     def pangolin_pts(self):
-        return self.xs, self.ys, self.zs
+        return Trajectory.check_norm(self.xs, self.ys, self.zs)
+
+    def numpy_pts(self):
+        return np.array(list(zip(self.xs, self.ys, self.zs)))
 
     @staticmethod
     def is_bounded(trajx, trajy, trajz):
@@ -70,6 +77,7 @@ class Trajectory:
             trajy = [float(x[-1]) for x in np_traj if x[0] == "ypos"]
             trajz = [float(x[-1]) for x in np_traj if x[0] == "zpos"]
 
+        
         m = min([len(trajx), len(trajy), len(trajz)])
         if not (sum([min(trajx), min(trajy), min(trajz)]) >= 0 and sum([max(trajx), max(trajy), max(trajz)]) <= 3):
 
@@ -78,6 +86,15 @@ class Trajectory:
             trajz = (np.array(trajz[:m]) - ZMIN) / (ZMAX - ZMIN)
 
         return trajx, trajy, trajz
-        
+    
+    @staticmethod
+    def on_road(point, ltraj, rtraj):
+        x, y, z = ltraj.pangolin_pts()
+        a = Polygon(list(zip(z, x))[:-200])
 
+        x, y, z = rtraj.pangolin_pts()
+        b = Polygon(list(zip(z, x))[:-200])
+        
+        track = a - b
+        return track.contains(Point(point.y, point.x))
         
