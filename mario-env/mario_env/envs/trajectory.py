@@ -3,6 +3,7 @@ from shapely.geometry.polygon import Polygon
 from shapely.geometry import Point
 from descartes import PolygonPatch
 from .constants import *
+import math
 
 class Trajectory:
     def __init__(self, name, x=[], y=[], z=[], env=None, writeable=True):
@@ -98,3 +99,24 @@ class Trajectory:
         track = a - b
         return track.contains(Point(point.y, point.x))
         
+    @staticmethod
+    def get_path_loss(pt, ptp):
+        mdist = 999999
+        mpt = (0, 0)
+        for x, y in zip(INTERPPATH[0], INTERPPATH[1]):
+            d = (pt[0] - x) ** 2 + (pt[1] - y) ** 2
+            if d < mdist:
+                mdist = d
+                mpt = (x, y)
+
+        yp = math.atan2(*(mpt/np.linalg.norm(mpt)))
+        facing = (pt[0] - ptp[0]), (pt[1] - ptp[1])
+        facing /= np.linalg.norm(facing)
+
+        heading_rel_to_path = abs(math.atan2(*facing) - yp) # should approach 0 
+
+        ye = abs(-math.sin(yp) * (pt[0] - mpt[0]) + math.cos(yp) * (pt[1] - mpt[1])) # cross track error
+
+        return heading_rel_to_path * ye
+
+

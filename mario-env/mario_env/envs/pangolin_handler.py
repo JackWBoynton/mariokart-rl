@@ -86,15 +86,9 @@ class Visualizer(object):
         self.q.put(trajs)
 
 
-class MyManager(BaseManager):
-    pass
-MyManager.register('LifoQueue', LifoQueue)
-
 class DDVisualizer(object):
     def __init__(self,):
         self.state = None
-        # self.manager = MyManager()
-        # self.manager.start()
         self.q = Queue(maxsize=1)
         self.vp = Process(target=self.viewer_thread, args=(self.q,))
         self.vp_daemon = True
@@ -122,7 +116,7 @@ class DDVisualizer(object):
                     if self.curr_point:
                         self.curr_point.remove()      
                     self.past_point = self.state    
-                    self.curr_point = self.ax.scatter(self.state.y, self.state.x, s=10000, color='gold',marker='+')
+                    self.curr_point = self.ax.scatter(self.state.y, self.state.x, s=10000, color='gold',marker='+', zorder=5)
                 # might add other stuff here i guess...
             plt.draw() 
             plt.pause(0.0000001) #is necessary for the plot to update for some reason

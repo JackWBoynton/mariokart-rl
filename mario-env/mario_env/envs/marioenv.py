@@ -183,14 +183,12 @@ class MarioEnv(gym.Env):
 
         self.update_current_traj(new_state)  # update curr_traj
         curr_point = Point(new_state[OUT_NP_STATE_NAMES_MAP["xpos"]], new_state[OUT_NP_STATE_NAMES_MAP["zpos"]])
-        if 1:
-            # self.vis.paint(
-            #     [self.current_traj, LEFT_TRAJ, RIGHT_TRAJ, CENTER_TRAJ]
-            # )  # update current_traj on plot
-            # print(new_state[OUT_NP_STATE_NAMES_MAP["xpos"]], new_state[OUT_NP_STATE_NAMES_MAP["zpos"]])
+        if self.vis:
+            self.vis.paint(
+                [self.current_traj, LEFT_TRAJ, RIGHT_TRAJ, CENTER_TRAJ]
+            )  # update current_traj on plot
             self.ddvis.paint(curr_point)
         
-        print(Trajectory.on_road(point=curr_point, ltraj=LEFT_TRAJ, rtraj=RIGHT_TRAJ))
 
         # print(Trajectory.on_road(self.current_traj.numpy_pts()[-1], LEFT_TRAJ, RIGHT_TRAJ))
 
@@ -296,33 +294,17 @@ class MarioEnv(gym.Env):
         return out
 
     def calculate_reward(self, new_state):
+
         lap_rewards = [
             abs(min((lt - MAX_RACETIME) / MAX_RACETIME, 0) * LAP_REWARD_SCALE)
             for lt in self.lap_times
         ]
 
-        # similarity between most similar expert traj and current state?
-
-        x, y, z = self.dolphin.get_xyz_traj()
-
-        dist = -1
-        sim2exp = 0
-        if len(x) > 2 and len(y) > 2 and len(z) > 2:
-
-            x, y, z = (
-                x[: min(len(x), len(y), len(z))],
-                y[: min(len(x), len(y), len(z))],
-                z[: min(len(x), len(y), len(z))],
-            )
-            # if self.vis:
-            # sim2exp = self.dirr(self.trajx, self.trajy, self.trajz, x, y, z)
-
-        # change in trajectory
         speed = self.vec3_speed(new_state)
-        if speed == -1:
-            speed = 0
 
-        return speed * 0.5 + sum(lap_rewards) + sim2exp
+        path_following_loss = Trajectory.get_path_loss((new_state[OUT_NP_STATE_NAMES_MAP["zpos"]], new_state[OUT_NP_STATE_NAMES_MAP["xpos"]]), (new_state[OUT_NP_STATE_NAMES_MAP["prev_zpos"]], new_state[OUT_NP_STATE_NAMES_MAP["prev_xpos"]]))
+
+        return (speed + sum(lap_rewards)) - path_following_loss
 
     def vec3_speed(self, state):
         """find the speed of kart at a given state
@@ -346,6 +328,9 @@ class MarioEnv(gym.Env):
         return math.sqrt(abs(x - x_) ** 2 + abs(y - y_) ** 2 + abs(z - z_) ** 2)
 
     def isdone(self, state):
+        on_road = Trajectory.on_road(point=curr_point, ltraj=LEFT_TRAJ, rtraj=RIGHT_TRAJ) # bool
+        if not on_road:
+            return True
 
         if (
             state[OUT_NP_STATE_NAMES_MAP["max_lap_completion"]]

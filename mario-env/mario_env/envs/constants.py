@@ -59,3 +59,14 @@ RIGHT_TRAJ = Trajectory(name="right", env=np.load(os.environ.get("RIGHT_TRAJ")),
 LEFT_TRAJ = Trajectory(name="left", env=np.load(os.environ.get("LEFT_TRAJ")), writeable=False)
 print("loaded track trajectories")
 
+from scipy.interpolate import griddata
+from scipy.interpolate import interp1d
+from scipy import interpolate
+import math
+
+
+x, y, z = CENTER_TRAJ.pangolin_pts()
+tck, u = interpolate.splprep([x[:-100], z[:-100]], s=0)
+out = interpolate.splev(np.arange(0, 1.001, 0.001), tck)
+
+INTERPPATH = out
