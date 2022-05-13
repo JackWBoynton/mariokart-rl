@@ -1,5 +1,5 @@
 # Reinforcement Learning v. Mario Kart Wii
-
+[presentation](https://docs.google.com/presentation/d/1fbYEa-bY0Zk0LKZKDZ45-N2DOWu5eStXzcqet7YjPkc/edit?usp=sharing)
 ## Requirements
 
 * `gym`
